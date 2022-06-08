@@ -53,6 +53,11 @@ function Todo() {
         <TodoItem key={item.key} item={item} onCheck={handleCheck}></TodoItem>
       ))}
       <div className="panel-block">{items.length} items</div>
+      <div className="panel-block">
+        <button className="button is-light is-fullwidth" onClick={clearItems}>
+          全てのToDoを削除
+        </button>
+      </div>
     </div>
   );
 }
