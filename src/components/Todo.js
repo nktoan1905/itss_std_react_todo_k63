@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 /* 
   【Todoのデータ構成】
 　・key：Todoを特定するID（String）
@@ -43,7 +43,7 @@ function Todo() {
   const handleFilterChange = value => setFilter(value);
   return (
     <div className="panel">
-      <div className="panel-heading">ITSS ToDoアプリ</div>
+      <div className="panel-heading has-background-danger has-text-white"><FontAwesomeIcon icon="fa-solid fa-calendar-check" /> ITSS ToDoアプリ</div>
       <Input onAdd={handleAdd} />
       <Filter
         onChange={handleFilterChange}
