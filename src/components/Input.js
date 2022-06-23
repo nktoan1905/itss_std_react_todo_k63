@@ -4,15 +4,18 @@ import React, { useState } from "react";
 　・新しいTodoを作成するINPUTフィールドを作成するコンポーネント
 　・Enterをクリックされたら入力された文字を使って新しいTodoを作成する
 */
-function Input( { onAdd }) {
-  const [text, setText] = React.useState('');
+function Input({ onAdd }) {
+  const [text, setText] = React.useState("");
 
-  const handleChange = e => setText(e.target.value);
+  const handleChange = (e) => setText(e.target.value);
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
-      onAdd(text);
-      setText('');
+      onAdd({
+        text: text,
+        done: false,
+      });
+      setText("");
     }
   };
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 /* 
   【Todoのデータ構成】
 　・key：Todoを特定するID（String）
@@ -13,13 +13,13 @@ import Input from "./Input";
 import Filter from "./Filter";
 
 /* カスタムフック */
-import useStorage from "../hooks/storage";
-
+// import useStorage from "../hooks/storage";
+import useFbStorage from "../hooks/fbStorage";
 /* ライブラリ */
 import { getKey } from "../lib/util";
 
 function Todo() {
-  const [items, putItems, clearItems] = useStorage();
+  const [items, addItem, updateItem, clearItems] = useFbStorage();
 
   const [filter, setFilter] = React.useState("ALL");
 
@@ -29,28 +29,26 @@ function Todo() {
     if (filter === "DONE") return item.done;
   });
   const handleCheck = (checked) => {
-    const newItems = items.map((item) => {
-      if (item.key === checked.key) {
-        item.done = !item.done;
-      }
-      return item;
-    });
-    putItems(newItems);
+    // const newItems = items.map((item) => {
+    //   if (item.key === checked.key) {
+    //     item.done = !item.done;
+    //   }
+    //   return item;
+    // });
+    updateItem(checked);
   };
   const handleAdd = (text) => {
-    putItems([...items, { key: getKey(), text, done: false }]);
   };
-  const handleFilterChange = value => setFilter(value);
+  const handleFilterChange = (value) => setFilter(value);
   return (
     <div className="panel">
-      <div className="panel-heading has-background-danger has-text-white"><FontAwesomeIcon icon="fa-solid fa-calendar-check" /> ITSS ToDoアプリ</div>
-      <Input onAdd={handleAdd} />
-      <Filter
-        onChange={handleFilterChange}
-        value={filter}
-      />
+      <div className="panel-heading has-background-danger has-text-white">
+        ITSS ToDoアプリ
+      </div>
+      <Input onAdd={addItem} />
+      <Filter onChange={handleFilterChange} value={filter} />
       {displayItems.map((item) => (
-        <TodoItem key={item.key} item={item} onCheck={handleCheck}></TodoItem>
+        <TodoItem key={item.id} item={item} onCheck={handleCheck}></TodoItem>
       ))}
       <div className="panel-block">{items.length} items</div>
       <div className="panel-block">
