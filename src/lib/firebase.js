@@ -69,9 +69,9 @@ export const clearFirebaseItem = async (item) => {
 // };
 export const uiConfig = {
   // Popup signin flow rather than redirect flow.
-  signInFlow: 'popup',
+  signInFlow: "popup",
   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-  signInSuccessUrl: '/signedIn',
+  signInSuccessUrl: "/signedIn",
   // We will display Google and Facebook as auth providers.
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -95,7 +95,7 @@ export const storeUserInfo = async (user) => {
   }
 };
 
-export const updateUser = async (user) => {
+export const updateUser = async (user, image) => {
   try {
     const userDoc = await firebase
       .firestore()
@@ -107,10 +107,21 @@ export const updateUser = async (user) => {
         .firestore()
         .collection("users")
         .doc(user.id)
-        .update({ ...userDoc.data() });
+        .update({ ...userDoc.data(), image: image });
     }
   } catch (err) {
     console.log(err);
   }
 };
 
+export const uploadImage = async (image) => {
+  const ref = firebase.storage().ref().child(`/images/${image.name}`);
+  let downloadUrl = "";
+  try {
+    await ref.put(image);
+    downloadUrl = await ref.getDownloadURL();
+  } catch (err) {
+    console.log(err);
+  }
+  return downloadUrl;
+};
