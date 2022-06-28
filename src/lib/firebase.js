@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import 'firebase/compat/storage';
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
@@ -62,22 +63,12 @@ export const clearFirebaseItem = async (item) => {
       console.log(err);
     });
 };
-// export const uiConfig = {
-//   signInFlow: "popup",
-//   signInSuccessUrl: "/",
-//   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-// };
 export const uiConfig = {
-  // Popup signin flow rather than redirect flow.
   signInFlow: "popup",
-  // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-  signInSuccessUrl: "/signedIn",
-  // We will display Google and Facebook as auth providers.
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-  ],
+  signInSuccessUrl: "/",
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 };
+
 export const storeUserInfo = async (user) => {
   const { uid } = user;
   const userDoc = await db.collection("users").doc(uid).get();
@@ -115,6 +106,7 @@ export const updateUser = async (user, image) => {
 };
 
 export const uploadImage = async (image) => {
+  console.log(image);
   const ref = firebase.storage().ref().child(`/images/${image.name}`);
   let downloadUrl = "";
   try {
