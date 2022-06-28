@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "todo-42c29"
-  }
+    "default": "todo-42c29",
+    "staging": "todos-7c5fe"
+  },
+  "targets": {}
 }

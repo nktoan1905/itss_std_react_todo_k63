@@ -1,19 +1,19 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import 'firebase/compat/storage';
+import "firebase/compat/storage";
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAJVPAaiBSrOsEKd6B3CfsKJDUc3759cUA",
-  authDomain: "todo-42c29.firebaseapp.com",
-  projectId: "todo-42c29",
-  storageBucket: "todo-42c29.appspot.com",
-  messagingSenderId: "436835056595",
-  appId: "1:436835056595:web:afed1da945fab45a7f8d26",
-  measurementId: "G-E30MQ7NW4G",
+  apiKey: "AIzaSyARYZhwcEA_z3QGlc9kzzWSARX9YJoZmM4",
+  authDomain: "todos-7c5fe.firebaseapp.com",
+  projectId: "todos-7c5fe",
+  storageBucket: "todos-7c5fe.appspot.com",
+  messagingSenderId: "221655653979",
+  appId: "1:221655653979:web:072f43d17f4b3411f8297e",
+  measurementId: "G-PQSS3866FG",
 };
 
 // Initialize Firebase
@@ -106,7 +106,6 @@ export const updateUser = async (user, image) => {
 };
 
 export const uploadImage = async (image) => {
-  console.log(image);
   const ref = firebase.storage().ref().child(`/images/${image.name}`);
   let downloadUrl = "";
   try {

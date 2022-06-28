@@ -20,6 +20,7 @@ function Upload({ userImage, onSletctedImage }) {
   };
 
   const ImageViewer = () => {
+    console.log(imageUrl)
     if (!imageUrl) {
       return <i class="fas fa-user"></i>
     } else {
